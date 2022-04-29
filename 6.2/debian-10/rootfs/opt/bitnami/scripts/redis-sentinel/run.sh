@@ -18,8 +18,10 @@ set -o pipefail
 args=("$REDIS_SENTINEL_CONF_FILE" "--daemonize" "no" "$@")
 
 info "** Starting Redis Sentinel **"
-if am_i_root; then
-    exec gosu "$REDIS_SENTINEL_DAEMON_USER" redis-sentinel "${args[@]}"
-else
-    exec redis-sentinel "${args[@]}"
-fi
+# We don't need this check
+#if am_i_root; then
+#    exec gosu "$REDIS_SENTINEL_DAEMON_USER" redis-sentinel "${args[@]}"
+#else
+#    exec redis-sentinel "${args[@]}"
+#fi
+exec redis-sentinel "${args[@]}"
